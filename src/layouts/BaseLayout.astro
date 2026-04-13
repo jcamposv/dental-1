@@ -1,0 +1,97 @@
+---
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import BookingModal from "../components/booking/BookingModal";
+import { siteConfig } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://ottodental.com");
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Otto Dental" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon (replace with your own) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts: Sora + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Módulo de reservas: WhatsApp + Google Calendar -->
+    <BookingModal
+      client:load
+      whatsappNumber={siteConfig.whatsapp.number}
+      googleCalendarEnabled={siteConfig.googleCalendar.enabled}
+      clinicName={siteConfig.name}
+      clinicAddress={siteConfig.address}
+    />
+
+    <!-- Intersection Observer for fade-in animations -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-fade-in-up");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      document.querySelectorAll("[data-animate]").forEach((el) => {
+        el.classList.add("opacity-0");
+        observer.observe(el);
+      });
+
+      // Conectar todos los botones de "Agendar" al modal de reserva
+      document.querySelectorAll("[data-booking]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.dispatchEvent(new CustomEvent("open-booking"));
+        });
+      });
+    </script>
+  </body>
+</html>

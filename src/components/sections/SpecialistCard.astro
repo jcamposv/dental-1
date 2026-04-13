@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  name: string;
+  specialty: string;
+  image: ImageMetadata;
+}
+
+const { name, specialty, image } = Astro.props;
+---
+
+<div class="group flex flex-col items-center text-center">
+  <!-- Retrato -->
+  <div class="mb-4 h-36 w-36 overflow-hidden rounded-full bg-neutral-100 shadow-md ring-4 ring-secondary transition-all duration-300 group-hover:ring-accent/40 group-hover:shadow-lg md:h-44 md:w-44">
+    <Image
+      src={image}
+      alt={`Retrato de ${name}`}
+      class="h-full w-full object-cover"
+      width={400}
+      height={400}
+    />
+  </div>
+  <h3 class="font-heading text-lg font-bold text-neutral-900">{name}</h3>
+  <p class="mt-1 text-sm text-primary font-medium">{specialty}</p>
+</div>

@@ -1,0 +1,60 @@
+---
+import Button from "../ui/Button.astro";
+import { Image } from "astro:assets";
+import { heroImg } from "../../data/site";
+---
+
+<section id="home" class="relative overflow-hidden bg-secondary pt-16">
+  <div class="container-narrow mx-auto grid items-center gap-10 px-5 py-12 md:px-8 lg:min-h-screen lg:grid-cols-2 lg:gap-16 lg:px-16 lg:py-0">
+    <!-- Contenido de texto -->
+    <div class="relative z-10 order-2 lg:order-1">
+      <!-- Insignia de confianza -->
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-primary shadow-sm backdrop-blur-sm">
+        <span class="flex h-2 w-2 rounded-full bg-accent"></span>
+        Odontología Moderna
+      </div>
+
+      <h1 class="font-heading text-4xl font-bold leading-tight text-neutral-900 md:text-5xl lg:text-6xl">
+        Cuidado Dental Gentil
+        <span class="text-primary">Para Cada Sonrisa</span>
+      </h1>
+
+      <p class="mt-6 max-w-lg text-lg leading-relaxed text-neutral-600">
+        Experimenta atención dental premium en un ambiente cálido y acogedor. Nuestro equipo experto combina tecnología avanzada con un toque gentil para darte la sonrisa que mereces.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4">
+        <Button variant="primary" href="#contact" size="lg" booking>
+          Agendar Cita
+        </Button>
+        <Button variant="outline" href="#services" size="lg">
+          Ver Servicios
+        </Button>
+      </div>
+    </div>
+
+    <!-- Imagen Hero -->
+    <div class="relative order-1 lg:order-2">
+      <div class="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[2rem] bg-neutral-200 shadow-2xl lg:max-w-none lg:rounded-[3rem]">
+        <Image
+          src={heroImg}
+          alt="Paciente sonriendo en consultorio dental"
+          class="h-full w-full object-cover"
+          widths={[400, 600, 900]}
+          sizes="(max-width: 768px) 400px, (max-width: 1024px) 600px, 900px"
+        />
+      </div>
+
+      <!-- Elementos decorativos flotantes -->
+      <div class="absolute -bottom-4 -left-4 hidden h-20 w-20 rounded-full bg-accent/20 blur-sm lg:block" aria-hidden="true"></div>
+      <div class="absolute -top-6 -right-6 hidden h-28 w-28 rounded-full border-4 border-accent/30 lg:block" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- Onda inferior -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden" aria-hidden="true">
+    <svg class="relative block w-full" style="height: 60px;" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,60 L0,20 Q300,0 600,20 Q900,40 1200,20 L1200,60 Z" fill="white"/>
+    </svg>
+  </div>
+</section>

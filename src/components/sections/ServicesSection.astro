@@ -1,0 +1,24 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import ServiceCard from "./ServiceCard.astro";
+import { services } from "../../data/site";
+---
+
+<section id="services" class="section-padding bg-neutral-50">
+  <div class="container-narrow mx-auto">
+    <SectionHeading
+      title="Lo Que Ofrecemos"
+      subtitle="Servicios dentales integrales adaptados a tus necesidades, entregados con precisión y cuidado por nuestro equipo experto."
+    />
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {services.map((service, i) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          image={service.image}
+          index={i}
+        />
+      ))}
+    </div>
+  </div>
+</section>

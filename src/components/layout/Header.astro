@@ -1,0 +1,60 @@
+---
+import { siteConfig } from "../../data/site";
+import { Image } from "astro:assets";
+import logoImg from "../../assets/images/logo.png";
+import MobileMenu from "./MobileMenu";
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md"
+>
+  <div class="container-narrow mx-auto flex items-center justify-between px-5 py-3 md:px-8 lg:px-16">
+    <!-- Logo -->
+    <a href="#home" class="flex items-center">
+      <Image
+        src={logoImg}
+        alt={siteConfig.name}
+        class="h-10 w-auto md:h-12"
+        height={48}
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Navegación principal">
+      {siteConfig.navigation.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm font-medium text-neutral-800 transition-colors hover:text-primary"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="#contact"
+        data-booking
+        class="inline-flex items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-semibold text-neutral-900 transition-all hover:bg-accent-dark hover:shadow-lg"
+      >
+        Agendar Cita
+      </a>
+    </nav>
+
+    <!-- Mobile Menu (React for interactivity) -->
+    <div class="lg:hidden">
+      <MobileMenu client:load navigation={siteConfig.navigation} logoSrc={logoImg.src} />
+    </div>
+  </div>
+</header>
+
+<!-- Header scroll shadow -->
+<script>
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    if (!header) return;
+    if (window.scrollY > 20) {
+      header.classList.add("shadow-md");
+    } else {
+      header.classList.remove("shadow-md");
+    }
+  });
+</script>

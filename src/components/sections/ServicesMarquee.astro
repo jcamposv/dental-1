@@ -1,0 +1,15 @@
+---
+const items = ["Nuestros Servicios", "Cuidado Dental", "Tratamiento Experto", "Soluciones Para Tu Sonrisa"];
+const repeated = [...items, ...items, ...items, ...items];
+---
+
+<section class="overflow-hidden bg-primary py-5" aria-hidden="true">
+  <div class="animate-marquee flex whitespace-nowrap">
+    {repeated.map((item, i) => (
+      <span class="mx-8 flex items-center gap-4 text-lg font-heading font-semibold uppercase tracking-widest text-white/80">
+        {item}
+        <span class="inline-block h-2 w-2 rounded-full bg-accent"></span>
+      </span>
+    ))}
+  </div>
+</section>

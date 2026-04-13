@@ -1,0 +1,35 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import { Image } from "astro:assets";
+import { audiences } from "../../data/site";
+---
+
+<section class="section-padding bg-white">
+  <div class="container-narrow mx-auto">
+    <SectionHeading
+      title="A Quién Ayudamos"
+      subtitle="Atención dental de calidad para cada etapa de la vida. Las sonrisas de tu familia están en buenas manos."
+    />
+    <div class="grid gap-6 md:grid-cols-3">
+      {audiences.map((item) => (
+        <div class="group overflow-hidden rounded-2xl bg-neutral-50 transition-all duration-300 hover:shadow-lg">
+          <!-- Imagen -->
+          <div class="aspect-[3/2] overflow-hidden bg-neutral-100">
+            <Image
+              src={item.image}
+              alt={item.title}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              widths={[400, 600]}
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+          <!-- Contenido -->
+          <div class="p-6">
+            <h3 class="font-heading text-xl font-bold text-neutral-900">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-600">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

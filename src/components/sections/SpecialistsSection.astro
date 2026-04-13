@@ -1,0 +1,23 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import SpecialistCard from "./SpecialistCard.astro";
+import { specialists } from "../../data/site";
+---
+
+<section id="specialists" class="section-padding bg-white">
+  <div class="container-narrow mx-auto">
+    <SectionHeading
+      title="Nuestros Especialistas"
+      subtitle="Un equipo dedicado de profesionales experimentados comprometidos con tu salud bucal y comodidad."
+    />
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
+      {specialists.map((doc) => (
+        <SpecialistCard
+          name={doc.name}
+          specialty={doc.specialty}
+          image={doc.image}
+        />
+      ))}
+    </div>
+  </div>
+</section>

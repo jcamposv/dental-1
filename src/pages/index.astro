@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import TrustSection from "../components/sections/TrustSection.astro";
+import ServicesMarquee from "../components/sections/ServicesMarquee.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import SpecialistsSection from "../components/sections/SpecialistsSection.astro";
+import ConsultationSection from "../components/sections/ConsultationSection.astro";
+import AudienceSection from "../components/sections/AudienceSection.astro";
+import TestimonialsSection from "../components/sections/TestimonialsSection.astro";
+import CTASection from "../components/sections/CTASection.astro";
+---
+
+<BaseLayout
+  title="Otto Dental — Cuidado Dental Gentil Para Cada Sonrisa"
+  description="Atención dental premium con un toque gentil. Otto Dental ofrece tratamientos de vanguardia incluyendo rellenos, blanqueamiento, cirugía e implantes en un ambiente cálido y acogedor."
+>
+  <HeroSection />
+  <div data-animate><TrustSection /></div>
+  <ServicesMarquee />
+  <div data-animate><ServicesSection /></div>
+  <div data-animate><SpecialistsSection /></div>
+  <div data-animate><ConsultationSection /></div>
+  <div data-animate><AudienceSection /></div>
+  <div data-animate><TestimonialsSection /></div>
+  <CTASection />
+</BaseLayout>
